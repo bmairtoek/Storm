@@ -1,4 +1,4 @@
-package pl.edu.storm;
+package pl.edu.storm.topologies;
 
 import org.apache.storm.Config;
 import org.apache.storm.StormSubmitter;
@@ -12,6 +12,8 @@ import org.apache.storm.trident.operation.builtin.MapGet;
 import org.apache.storm.trident.operation.builtin.Sum;
 import org.apache.storm.trident.testing.MemoryMapState;
 import org.apache.storm.tuple.Fields;
+import pl.edu.storm.SumAggregator;
+import pl.edu.storm.YoutubeVideosDataSpout;
 
 import java.util.Arrays;
 

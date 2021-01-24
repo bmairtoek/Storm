@@ -50,7 +50,10 @@ public class YoutubeVideosDataSpout extends BaseRichSpout {
                 String input;
                 if((input = reader.readLine()) != null) {
                     String[] line = input.split(",");
-                    collector.emit(new Values(Integer.parseInt(line[headers.get("category_id")]), Integer.parseInt(line[headers.get("views")])));
+                    collector.emit(new Values(
+                            Integer.parseInt(line[headers.get("category_id")]),
+                            Integer.parseInt(line[headers.get("views")]),
+                            Integer.parseInt(line[headers.get("likes")])));
                 } else {
                     reader.close();
                     finished = true;
@@ -63,7 +66,7 @@ public class YoutubeVideosDataSpout extends BaseRichSpout {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields("category_id", "views"));
+        outputFieldsDeclarer.declare(new Fields("category_id", "views", "likes"));
     }
 
 }

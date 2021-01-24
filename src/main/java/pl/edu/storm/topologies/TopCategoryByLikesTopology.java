@@ -1,20 +1,20 @@
-package pl.edu.storm;
+package pl.edu.storm.topologies;
 
 import org.apache.storm.Config;
 import org.apache.storm.StormSubmitter;
 import org.apache.storm.generated.AlreadyAliveException;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.InvalidTopologyException;
-import org.apache.storm.trident.TridentState;
 import org.apache.storm.trident.TridentTopology;
 import org.apache.storm.trident.operation.Consumer;
 import org.apache.storm.trident.operation.builtin.Sum;
 import org.apache.storm.trident.testing.MemoryMapState;
 import org.apache.storm.tuple.Fields;
+import pl.edu.storm.YoutubeVideosDataSpout;
 
 import java.util.Arrays;
 
-public class TopCategoryPersistentAggregateTopology {
+public class TopCategoryByLikesTopology {
 
     public static void main(String[] args) {
         try {
