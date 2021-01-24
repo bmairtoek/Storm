@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.stream.IntStream;
 public class YoutubeVideosDataSpout extends BaseRichSpout {
     private final String dataFilePath;
 
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
     private Map<String, Integer> headers = new HashMap<>();
     private SpoutOutputCollector collector;
     private BufferedReader reader;
@@ -53,20 +56,21 @@ public class YoutubeVideosDataSpout extends BaseRichSpout {
                     collector.emit(new Values(
                             Integer.parseInt(line[headers.get("category_id")]),
                             Integer.parseInt(line[headers.get("views")]),
-                            Integer.parseInt(line[headers.get("likes")])));
+                            Integer.parseInt(line[headers.get("likes")]),
+                            simpleDateFormat.parse(line[headers.get("publish_time")]).getTime()));
                 } else {
                     reader.close();
                     finished = true;
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields("category_id", "views", "likes"));
+        outputFieldsDeclarer.declare(new Fields("category_id", "views", "likes", "publish_time"));
     }
 
 }
