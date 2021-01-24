@@ -57,6 +57,8 @@ public class YoutubeVideosDataSpout extends BaseRichSpout {
                             Integer.parseInt(line[headers.get("category_id")]),
                             Integer.parseInt(line[headers.get("views")]),
                             Integer.parseInt(line[headers.get("likes")]),
+                            Integer.parseInt(line[headers.get("comment_count")]),
+                            line[headers.get("title")],
                             simpleDateFormat.parse(line[headers.get("publish_time")]).getTime()));
                 } else {
                     reader.close();
@@ -70,7 +72,7 @@ public class YoutubeVideosDataSpout extends BaseRichSpout {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
-        outputFieldsDeclarer.declare(new Fields("category_id", "views", "likes", "publish_time"));
+        outputFieldsDeclarer.declare(new Fields("category_id", "views", "likes", "comment_count", "title", "publish_time"));
     }
 
 }

@@ -16,7 +16,6 @@ import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 import org.apache.storm.windowing.TupleWindow;
-import pl.edu.storm.PrintingBolt;
 import pl.edu.storm.YoutubeVideosDataSpout;
 
 import java.util.Comparator;
