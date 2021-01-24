@@ -26,7 +26,7 @@ public class StormExampleApp {
         TopologyBuilder builder = new TopologyBuilder();
 
         if(useYoutubeData) {
-            IRichSpout spout = new YoutubeDataSpout();
+            IRichSpout spout = new YoutubeDataSpout("US-youtube-sample.json");
             builder.setSpout("youtubeDataSpout", spout);
 
             IBasicBolt file = new PrintingBolt();

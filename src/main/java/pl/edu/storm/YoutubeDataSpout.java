@@ -16,11 +16,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class YoutubeDataSpout extends BaseRichSpout {
-    private final String dataFilePath = "US-youtube-sample.json";
+    private final String dataFilePath;
 
     private JSONArray data;
     private int dataPointer = 0;
     private SpoutOutputCollector collector;
+
+    public YoutubeDataSpout(String dataFilePath) {
+        this.dataFilePath = dataFilePath;
+    }
 
     @Override
     public void open(Map map, TopologyContext topologyContext,
